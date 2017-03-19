@@ -1,17 +1,21 @@
-import React from "react";
-import $ from "jquery";
-import _ from "underscore";
+import React from 'react';
+import $ from 'jquery';
+import _ from 'underscore';
 
 export default class Layout extends React.Component {
 
-    getLiveTimes(url) {
+    getCycleRoute(url) {
         return $.ajax({
             url: url
-        }).then(function(data) {
+        });
+    }
+
+    displayDirections() {
+        this.getCycleRoute('https://transportapi.com/v3/uk/cycle/journey/from/postcode:IG12ET/to/postcode:E16QL.json?app_id=03bf8009&app_key=d9307fd91b0247c607e098d5effedc97').then(function(data) {
             console.log(_.first(data.routes).instructions);
         }).fail(function() {
             console.log('Failed to fetch resource');
-        });
+        })
     }
 
     render() {
@@ -19,7 +23,7 @@ export default class Layout extends React.Component {
             <div className="liveTimes">
                 <input type="text" placeholder="From"/>
                 <input type="text" placeholder="To"/>
-                <button onClick={() => this.getLiveTimes('https://transportapi.com/v3/uk/cycle/journey/from/postcode:IG12ET/to/postcode:E16QL.json?app_id=03bf8009&app_key=d9307fd91b0247c607e098d5effedc97')}>Get Cycle Route</button>
+                <button onClick={() => this.displayDirections()}>Get Cycle Route</button>
             </div>
         );
     }
