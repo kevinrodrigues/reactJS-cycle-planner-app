@@ -18,7 +18,7 @@ export default class Layout extends React.Component {
             <div className="liveTimes">
                 <input type="text" placeholder="From"/>
                 <input type="text" placeholder="To"/>
-                <button onClick={() => this.getLiveTimes('https://transportapi.com/v3/uk/cycle/journey/from/postcode:IG62HJ/to/postcode:IG61EG.json?app_id=03bf8009&app_key=d9307fd91b0247c607e098d5effedc97')}>Get Cycle Route</button>
+                <button onClick={() => this.getLiveTimes('https://transportapi.com/v3/uk/cycle/journey/from/postcode:IG12ET/to/postcode:E16QL.json?app_id=03bf8009&app_key=d9307fd91b0247c607e098d5effedc97')}>Get Cycle Route</button>
             </div>
         );
     }
