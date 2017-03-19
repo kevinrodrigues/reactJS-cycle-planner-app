@@ -1,5 +1,6 @@
 import React from "react";
 import $ from "jquery";
+import _ from "underscore";
 
 export default class Layout extends React.Component {
 
@@ -7,7 +8,7 @@ export default class Layout extends React.Component {
         return $.ajax({
             url: url
         }).then(function(data) {
-            console.log(data);
+            console.log(_.first(data.routes).instructions);
         }).fail(function() {
             console.log('Failed to fetch resource');
         });
