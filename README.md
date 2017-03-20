@@ -1,3 +1,3 @@
-# reactJS-Starter
+# reactJS Cycle Journey Planner
 
-- yarn start
+- yarn start available on host: http://localhost:8080
