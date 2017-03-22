@@ -10,11 +10,10 @@ export default class CycleRoute extends React.Component {
     constructor() {
         super();
 
+        const CYCLE_CONSTANTS = window && window.CYCLEROUTE_CONFIG && window.CYCLEROUTE_CONFIG.config;
+
         this.state = {
-            "config": {
-                "appId": "03bf8009",
-                "appKey": "d9307fd91b0247c607e098d5effedc97"
-            }
+            "apiUrl": `https://transportapi.com/v3/uk/cycle/journey/from/postcode:IG12ET/to/postcode:E16QL.json?app_id=${CYCLE_CONSTANTS.appId}&app_key=${CYCLE_CONSTANTS.appKey}`
         };
     }
 
@@ -25,9 +24,8 @@ export default class CycleRoute extends React.Component {
     }
 
     displayDirections() {
-        this.getCycleRoute('https://transportapi.com/v3/uk/cycle/journey/from/postcode:IG12ET/to/postcode:E16QL.json?app_id=03bf8009&app_key=d9307fd91b0247c607e098d5effedc97').done(_.bind(function(data) {
+        this.getCycleRoute(this.state.apiUrl).done(_.bind(function(data) {
             console.log(_.first(data.routes).instructions);
-            console.log(this.state);
         }, this)).fail(function() {
             console.log('Failed to fetch resource');
         });
