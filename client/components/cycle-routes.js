@@ -7,6 +7,17 @@ import ButtonGetRoute from "./route-btn";
 
 export default class CycleRoute extends React.Component {
 
+    constructor() {
+        super();
+
+        this.state = {
+            "config": {
+                "appId": "03bf8009",
+                "appKey": "d9307fd91b0247c607e098d5effedc97"
+            }
+        };
+    }
+
     getCycleRoute(url) {
         return $.ajax({
             url: url
@@ -14,11 +25,12 @@ export default class CycleRoute extends React.Component {
     }
 
     displayDirections() {
-        this.getCycleRoute('https://transportapi.com/v3/uk/cycle/journey/from/postcode:IG12ET/to/postcode:E16QL.json?app_id=03bf8009&app_key=d9307fd91b0247c607e098d5effedc97').then(function(data) {
+        this.getCycleRoute('https://transportapi.com/v3/uk/cycle/journey/from/postcode:IG12ET/to/postcode:E16QL.json?app_id=03bf8009&app_key=d9307fd91b0247c607e098d5effedc97').done(_.bind(function(data) {
             console.log(_.first(data.routes).instructions);
-        }).fail(function() {
+            console.log(this.state);
+        }, this)).fail(function() {
             console.log('Failed to fetch resource');
-        })
+        });
     }
 
     render() {
