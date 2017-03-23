@@ -15,14 +15,11 @@ export default class CycleRoute extends React.Component {
             "from": "IG12ET",
             "to": "IG12TG"
         };
-
-        this.handleChange = this.handleChange.bind(this);
     }
 
     handleChange(event) {
         this.setState({
-            from: this.formatPostcodeUserInput(event.target.value),
-            to: this.formatPostcodeUserInput(event.target.value)
+            [event.target.name]: this.formatPostcode(event.target.value)
         });
     }
 
@@ -32,7 +29,7 @@ export default class CycleRoute extends React.Component {
         });
     }
 
-    formatPostcodeUserInput(str) {
+    formatPostcode(str) {
         return str.replace(/\s+/g, '').toUpperCase();
     }
 
