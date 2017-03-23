@@ -21,13 +21,9 @@ export default class CycleRoute extends React.Component {
 
     handleChange(event) {
         this.setState({
-            from: event.target.value,
-            to: event.target.value
+            from: this.formatPostcodeUserInput(event.target.value),
+            to: this.formatPostcodeUserInput(event.target.value)
         });
-    }
-
-    handleClick() {
-        console.log(this.state);
     }
 
     getCycleRoute(url) {
@@ -40,14 +36,10 @@ export default class CycleRoute extends React.Component {
         return str.replace(/\s+/g, '').toUpperCase();
     }
 
-    getInputValue(event) {
-        return console.log(this.formatPostcodeUserInput(event.target.value));
-    }
-
     displayDirections() {
         const CYCLE_CONSTANTS = window.CYCLEROUTE_CONFIG && window.CYCLEROUTE_CONFIG.config;
 
-        this.getCycleRoute(`https://transportapi.com/v3/uk/cycle/journey/from/postcode:${this.state.postcode.from}/to/postcode:${this.state.postcode.to}.json?app_id=${CYCLE_CONSTANTS.appId}&app_key=${CYCLE_CONSTANTS.appKey}`).
+        this.getCycleRoute(`https://transportapi.com/v3/uk/cycle/journey/from/postcode:${this.state.from}/to/postcode:${this.state.to}.json?app_id=${CYCLE_CONSTANTS.appId}&app_key=${CYCLE_CONSTANTS.appKey}`).
         done(_.bind((data) => {
             console.log(_.first(data.routes));
         }, this)).
@@ -59,8 +51,8 @@ export default class CycleRoute extends React.Component {
     render() {
         return (
             <div className="cycle-routes">
-                <InputUI triggerOnChange={this.getInputValue.bind(this)}/>
-                <ButtonGetRoute handleClickEvent={this.handleClick.bind(this)} />
+                <InputUI triggerOnChange={this.handleChange.bind(this)}/>
+                <ButtonGetRoute handleClickEvent={this.displayDirections.bind(this)} />
             </div>
         );
     }
